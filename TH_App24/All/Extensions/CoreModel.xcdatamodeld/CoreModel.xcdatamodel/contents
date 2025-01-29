@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="EarModel" representedClassName="EarModel" syncable="YES" codeGenerationType="class">
+        <attribute name="eaDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eaDurH" optional="YES" attributeType="String"/>
+        <attribute name="eaDurM" optional="YES" attributeType="String"/>
+        <attribute name="eaEarning" optional="YES" attributeType="String"/>
+        <attribute name="eaLoc" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="InspirModel" representedClassName="InspirModel" syncable="YES" codeGenerationType="class">
+        <attribute name="inAu" optional="YES" attributeType="String"/>
+        <attribute name="inQuote" optional="YES" attributeType="String"/>
+        <attribute name="inRate" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="MaterModel" representedClassName="MaterModel" syncable="YES" codeGenerationType="class">
+        <attribute name="maClos" optional="YES" attributeType="String"/>
+        <attribute name="maDurH" optional="YES" attributeType="String"/>
+        <attribute name="maDurM" optional="YES" attributeType="String"/>
+        <attribute name="maMain" optional="YES" attributeType="String"/>
+        <attribute name="maName" optional="YES" attributeType="String"/>
+        <attribute name="maOpen" optional="YES" attributeType="String"/>
+    </entity>
+</model>
