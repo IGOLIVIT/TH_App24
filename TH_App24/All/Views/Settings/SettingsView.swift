@@ -10,6 +10,8 @@ import StoreKit
 
 struct SettingsView: View {
     
+    @StateObject var viewModel = EarningsViewModel()
+    
     @Environment(\.presentationMode) var back
     
     var body: some View {
@@ -105,6 +107,36 @@ struct SettingsView: View {
                                 .padding(18)
                                 .background(RoundedRectangle(cornerRadius: 10).fill(Color("bg")))
                             })
+                            .padding(.bottom, 20)
+                            
+                            Button(action: {
+
+                                withAnimation(.spring()) {
+                                    
+                                    viewModel.isDeleteAll = true
+                                }
+                                
+                            }, label: {
+                                
+                                HStack {
+                                    
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                        .font(.system(size: 17, weight: .medium))
+                                    
+                                    Text("Reset app")
+                                        .foregroundColor(.red)
+                                        .font(.system(size: 17, weight: .medium))
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.red)
+                                        .font(.system(size: 16, weight: .regular))
+                                }
+                                .padding(18)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color("bg")))
+                            })
                         }
                     }
                     .padding()
@@ -114,6 +146,89 @@ struct SettingsView: View {
                              
             }
         }
+        .overlay(
+            
+            ZStack {
+                
+                Color.black.opacity(viewModel.isDeleteAll ? 0.5 : 0)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        
+                        withAnimation(.spring()) {
+                            
+                            viewModel.isDeleteAll = false
+                        }
+                    }
+                
+                VStack(spacing: 15) {
+
+                    Text("App Reset")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .semibold))
+                        .multilineTextAlignment(.center)
+                        .padding(.vertical)
+                    
+                    Text("Are you sure you want to delete all data and restore the app to its original state? This action cannot be undone.")
+                        .foregroundColor(.white)
+                        .font(.system(size: 15, weight: .regular))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+
+                    Rectangle()
+                        .fill(Color("bg"))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 1)
+                        .padding(.vertical, 7)
+                    
+                    HStack {
+                        
+                        Button(action: {
+                            
+                            withAnimation(.spring()) {
+                                
+                                viewModel.isDeleteAll = false
+                            }
+                            
+                        }, label: {
+                            
+                            Text("Cancel")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17, weight: .regular))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 45)
+                            
+                        })
+                        
+                        Button(action: {
+                            
+                            CoreDataStack.shared.deleteAllData()
+                            
+                            withAnimation(.spring()) {
+                                
+                                viewModel.isDeleteAll = false
+                            }
+                            
+                        }, label: {
+                            
+                            Text("Reset")
+                                .foregroundColor(.red)
+                                .font(.system(size: 18, weight: .semibold))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 45)
+                            
+                        })
+
+                    }
+                    .padding(.top, 25)
+
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 20).fill(Color("bg")))
+                .padding()
+                .offset(y: viewModel.isDeleteAll ? 0 : UIScreen.main.bounds.height)
+            }
+        )
     }
 }
 

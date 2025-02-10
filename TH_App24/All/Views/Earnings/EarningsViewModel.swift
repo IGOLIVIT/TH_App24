@@ -10,6 +10,9 @@ import CoreData
 
 final class EarningsViewModel: ObservableObject {
     
+    @Published var isDeleteAll: Bool = false
+    @Published var isDeleteAllCompleted: Bool = false
+    
     @AppStorage("TotEar") var TotEar: Int = 0
 
     @Published var isAdd: Bool = false
